@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import axios from "axios"
 import Movies from '../Movies/Movies'
+import { TextField } from '@mui/material'
+import "./listofmovies.css"
 const ListofMovies = () => {
     const [movies, setMovies] = useState({})
     const [keyword, setKeyword] = useState("")
@@ -29,12 +31,17 @@ const ListofMovies = () => {
 
 
     return (
-        <div>
+        <div className="ui">
             <form onSubmit={onSearch}>
-                <input type="text" value={keyword} onChange={inputChange} />
+                <div className="nav">
+                    <TextField id="standard-basic" label="Search a movie..." variant="standard" value={keyword} onChange={inputChange} />
+                </div>
             </form>
+            {movies.Title && (
+                <>
             <Movies data={movies} />
             <a href={`https://cuevana3.io/?s=${movies.Title}`} target="_blank">Watch the movie in cuevana... if it's there👀</a>
+            </>)}
         </div>
     )
 }
